@@ -11,7 +11,7 @@ This will download and install SteamCMD. It will also install V Rising and run i
 
 ## Example Env params
 
-Environment variables are in scripts/.env
+Environment variables are in /opt/scripts/.env
 
 | Name | Value | Example |
 | --- | --- | --- |
@@ -36,9 +36,13 @@ Environment variables are in scripts/.env
 
 Run `scripts/setup.sh` to prepare the server.
 
+Copy `scripts/.env.example` to `/opt/scripts/.env` and edit with your desired settings.
+
 ## Running
 
 Run `/opt/scripts/start.sh` to start the server. It's recommended to run this within screen, or tmux.
+
+V Rising configuration files will be in `/serverdata/serverfiles/save-data/Settings`.
 
 ## TODO
 

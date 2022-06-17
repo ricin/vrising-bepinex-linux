@@ -27,6 +27,7 @@ echo "---Taking ownership of data...---"
 chown -R root:${S_GID} /opt/scripts
 chmod -R 750 /opt/scripts
 chown -R ${S_UID}:${S_GID} ${DATA_DIR}
+mkdir -p ${SERVER_DIR}/logs && chmod -R 750 ${SERVER_DIR}/logs
 
 echo "---Starting...---"
 term_handler() {
@@ -36,7 +37,6 @@ term_handler() {
 }
 
 trap 'kill ${!}; term_handler' SIGTERM
-chmod -R 750 ${SERVER_DIR}/logs
 su ${USER} -c "/opt/scripts/start-server.sh" &
 killpid="$!"
 while true

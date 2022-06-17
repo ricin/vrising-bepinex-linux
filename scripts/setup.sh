@@ -51,11 +51,12 @@ dpkg --add-architecture i386 && \
 	echo " deb https://dl.winehq.org/wine-builds/debian/ bullseye main" >> /etc/apt/sources.list.d/wine.list && \
 	apt-get update && \
         apt-get -y install --no-install-recommends winehq-stable \
-		curl unzip jq lib32gcc-s1 screen xvfb winbind xauth && \
+		curl unzip jq lib32gcc-s1 screen xvfb winbind xauth rsync && \
 	apt-get -y --purge remove software-properties-common gnupg2 && \
 	apt-get -y autoremove && \
 	rm -rf /var/lib/apt/lists/*
-
+	
+echo -e "\n\n\n"
 echo "-- Creating directories and setting permissions"
 rm -rf /temp/dump
 mkdir -p $DATA_DIR && \
