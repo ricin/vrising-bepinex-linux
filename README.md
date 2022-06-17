@@ -2,9 +2,9 @@
 This will download, install, and run SteamCMD, and V Rising Dedicated Server. 
 Optionally it will download the latest [BepInEx Pack for V Rising](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising/), and enable it.
 
-**Save Files:** The save files are located in: `/serverdata/serverfiles/save-data/Saves`
+**Save Files:** The save files are located in: `${SERVER_DIR}/save-data/Saves`
 
-**Config Files:** The config files are located in: `/serverdata/serverfiles/save-data/Settings`
+**Config Files:** The config files are located in: `${SERVER_DIR}/save-data/Settings`
 
 **ATTENTION:** First Startup can take very long since it downloads the game server files!
 
@@ -12,13 +12,14 @@ Optionally it will download the latest [BepInEx Pack for V Rising](https://v-ris
 
 Environment variables are in /opt/scripts/.env
 
-| Name | Value | Example |
+| Name | Value | Example/Default |
 | --- | --- | --- |
-| STEAMCMD_DIR | Folder for SteamCMD | /serverdata/steamcmd |
-| SERVER_DIR | Folder for game files | /serverdata/serverfiles |
-| GAME_ID | The GAME_ID that the container downloads at startup. If you want to install a static or beta version of the game change the value to: '1829350 -beta YOURBRANCH' (without quotes, replace YOURBRANCH with the branch or version you want to install). | 1829350 |
+| DATA_DIR | Base data directory | /serverdata |
+| STEAMCMD_DIR | Folder for SteamCMD | ${DATA_DIR}/steamcmd |
+| SERVER_DIR | Folder for game files | ${DATA_DIR}/serverfiles |
+| GAME_ID | The GAME_ID that is downloaded at startup. If you want to install a static or beta version of the game change the value to: '1829350 -beta YOURBRANCH' (without quotes, replace YOURBRANCH with the branch or version you want to install). | 1829350 |
 | SERVER_NAME | Enter your preferred server name. A unique server name will be generated upon first run | empty |
-| WORLD_NAME | Enter your prefered world name. Defaults to `world1` from `/serverdata/serverfiles/save-data/Settings/ServerHostSettings.json` | empty |
+| WORLD_NAME | Enter your prefered world name. Defaults to `world1` from `${SERVER_DIR}/save-data/Settings/ServerHostSettings.json` | empty |
 | GAME_PARAMS | Enter additional game startup parameters if needed, otherwise leave empty. | empty |
 | ENABLE_BEPINEX | If you want to enable BepInEx for V Rising set this variable to 'true' (without quotes). For more help please refer to this site: [Click](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising/) | empty |
 | UID | User Identifier | 1001 |
@@ -32,6 +33,8 @@ Environment variables are in /opt/scripts/.env
 
 **This is for Debian 11 only for now.**
 
+**It has only been tested on a Debian 11.3 install.**
+
 Run `scripts/setup.sh` to prepare the server.
 
 ## Running
@@ -39,7 +42,7 @@ Run `scripts/setup.sh` to prepare the server.
 Run `/opt/scripts/start.sh` to start the server. It's recommended to run this within screen, or tmux.
 
 A unique server name and password will be generated upon first run. 
-You can change them in `/serverdata/serverfiles/save-data/Settings/ServerHostSettings.json`
+You can change them in `${SERVER_DIR}/save-data/Settings/ServerHostSettings.json`
 
 ## TODO
 
