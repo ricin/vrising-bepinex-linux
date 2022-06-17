@@ -30,10 +30,14 @@ run_checks()
 
 run_checks
 
-mkdir -p /opt/scripts/
+mkdir -p /opt/{scripts,words}
 
 if [ ! -f /opt/scripts/start.sh ] || [ ! -f /opt/scripts/start-server.sh ] || [ ! -f /opt/scripts/start-watchdog.sh ];then
 	cp ${SCRIPT_DIR}/start.sh ${SCRIPT_DIR}/start-watchdog.sh ${SCRIPT_DIR}/start-server.sh /opt/scripts/
+fi
+
+if [ ! -f /opt/words/bosses ] || [ ! -f /opt/words/adjectives ];then
+	cp ${SCRIPT_DIR}/../words/* /opt/words/
 fi
 
 if [ ! -f /opt/scripts/.env ];then

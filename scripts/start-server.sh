@@ -1,4 +1,24 @@
 #!/bin/bash
+
+genSlug()
+{
+    local a="$(cat /opt/words/adjectives|tr '\n' ' ')"
+    local b="$(cat /opt/words/bosses|tr '\n' ' ')"
+    local SIFS=$IFS
+    IFS=' '
+    local adjectives=($a)
+    local bosses=($b)
+    num_adj=${#adjectives[*]}
+    num_boss=${#bosses[*]}
+    IFS=$SIFS
+
+    local ADJ1=${adjectives[$((RANDOM%num_adj))]}
+    local ADJ2=${adjectives[$((RANDOM%num_adj))]}
+    local BOSS=${bosses[$((RANDOM%num_boss))]}
+    echo "${ADJ1^}${ADJ2^}${BOSS^}"
+
+}
+
 if [ ! -f ${STEAMCMD_DIR}/steamcmd.sh ]; then
     echo "SteamCMD not found!"
     wget -q -O ${STEAMCMD_DIR}/steamcmd_linux.tar.gz http://media.steampowered.com/client/steamcmd_linux.tar.gz 
@@ -159,9 +179,9 @@ if [ ! -d ${SERVER_DIR}/save-data/Settings ]; then
   cp -R ${SERVER_DIR}/VRisingServer_Data/StreamingAssets/Settings ${SERVER_DIR}/save-data
   ln -sfn ${SERVER_DIR}/save-data/Settings/adminlist.txt ${SERVER_DIR}/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt
 
-  UUID=$(od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3$4}')
+  NAME_SLUG=$(genSlug)
   PASSWD=$(od -x /dev/urandom | head -1 | awk '{OFS="-"; print $8$7}')
-  NAME="Another V Rising Server [$UUID]"
+  NAME="Another V Rising Server [$NAME_SLUG]"
 
   jq ".Name = \"$NAME\" | .Password = \"$PASSWD\"" \
     ${SERVER_DIR}/VRisingServer_Data/StreamingAssets/Settings/ServerHostSettings.json | tee ${SERVER_DIR}/save-data/Settings/ServerHostSettings.json
