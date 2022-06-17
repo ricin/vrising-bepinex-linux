@@ -1,5 +1,5 @@
-﻿{
-  "Name": "V Rising Docker",
+{
+  "Name": "Another V Rising Server",
   "Description": "",
   "Port": 9876,
   "QueryPort": 9877,
@@ -8,7 +8,7 @@
   "MaxConnectedAdmins": 4,
   "ServerFps": 30,
   "SaveName": "world1",
-  "Password": "Docker",
+  "Password": "imaginemorbing",
   "Secure": true,
   "ListOnMasterServer": true,
   "AutoSaveCount": 50,

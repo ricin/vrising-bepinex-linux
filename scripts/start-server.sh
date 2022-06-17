@@ -157,18 +157,39 @@ fi
 if [ ! -d ${SERVER_DIR}/save-data/Settings ]; then
   mkdir -p ${SERVER_DIR}/save-data
   cp -R ${SERVER_DIR}/VRisingServer_Data/StreamingAssets/Settings ${SERVER_DIR}/save-data
-fi
+  ln -sfn ${SERVER_DIR}/save-data/Settings/adminlist.txt ${SERVER_DIR}/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt
 
-ln -sfn ${SERVER_DIR}/save-data/Settings/adminlist.txt ${SERVER_DIR}/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt
+  UUID=$(od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3$4}')
+  PASSWD=$(od -x /dev/urandom | head -1 | awk '{OFS="-"; print $8$7}')
+  NAME="Another V Rising Server [$UUID]"
+
+  jq ".Name = \"$NAME\" | .Password = \"$PASSWD\"" \
+    ${SERVER_DIR}/VRisingServer_Data/StreamingAssets/Settings/ServerHostSettings.json | tee ${SERVER_DIR}/save-data/Settings/ServerHostSettings.json
+  echo -e "\n\n\n"
+  echo "--- Generated server Name and Password ---"
+  echo -e "---     Name:  ${NAME}"
+  echo -e "--- Password:  ${PASSWD}"
+  echo -e "\n\n\n"
+fi
 
 echo "---Checking for old display lock files---"
 find /tmp -name ".X99*" -exec rm -f {} \; > /dev/null 2>&1
-chmod -R ${DATA_PERM} ${DATA_DIR}
+chmod -R ${DATA_PERM} ${DATA_DIR} ${SERVER_DIR}
 echo "---Server ready---"
 
+
 echo "---Start Server---"
+
+if [ ! -z "${SERVER_NAME}" ];then
+  GAME_PARAMS=(${GAME_PARAMS} -serverName "${SERVER_NAME}")
+fi
+
+if [ ! -z "${WORLD_NAME}" ];then
+  GAME_PARAMS=("${GAME_PARAMS[@]}" -saveName "${WORLD_NAME}")
+fi 
+
 cd ${SERVER_DIR}
-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/VRisingServer.exe -persistentDataPath ${SERVER_DIR}/save-data -serverName "${SERVER_NAME}" -saveName "${WORLD_NAME}" -logFile ${SERVER_DIR}/logs/VRisingServer.log ${GAME_PARAMS} >/dev/null 2>&1 &
-sleep 5
+xvfb-run --auto-servernum --server-args='-screen 0 640x480x24:32' wine64 ${SERVER_DIR}/VRisingServer.exe -persistentDataPath ${SERVER_DIR}/save-data -logFile ${SERVER_DIR}/logs/VRisingServer.log "${GAME_PARAMS[@]}" >/dev/null 2>&1 &
+sleep 8
 /opt/scripts/start-watchdog.sh &
 tail -n +0 -f ${SERVER_DIR}/logs/VRisingServer.log

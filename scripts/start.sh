@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 . /opt/scripts/.env
 
 echo "---Ensuring UID: ${S_UID} matches user---"
@@ -27,7 +26,9 @@ echo "---Taking ownership of data...---"
 chown -R root:${S_GID} /opt/scripts
 chmod -R 750 /opt/scripts
 chown -R ${S_UID}:${S_GID} ${DATA_DIR}
-mkdir -p ${SERVER_DIR}/logs && chmod -R 750 ${SERVER_DIR}/logs
+mkdir -p ${SERVER_DIR}/logs
+chown -R ${S_UID}:${S_GID} ${SERVER_DIR}
+chmod -R 750 ${SERVER_DIR}/logs
 
 echo "---Starting...---"
 term_handler() {
