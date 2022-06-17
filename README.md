@@ -2,9 +2,11 @@
 This will download and install SteamCMD. It will also install V Rising and run it.
 
 **Save Files:** The save files are located in: .../save-data/Saves
+
 **Config Files:** The config files are located in: .../save-data/Settings
 
 **ATTENTION:** First Startup can take very long since it downloads the gameserver files!
+
 
 
 ## Example Env params
@@ -28,4 +30,20 @@ Environment variables are in scripts/.env
 | PASSWRD | Leave blank for anonymous login | blank |
 
 
+## Setup
+
+**This is for Debian 11 only for now.**
+
+Run `scripts/setup.sh` to prepare the server.
+
+## Running
+
+Run `/opt/scripts/start.sh` to start the server. It's recommended to run this within screen, or tmux.
+
+## TODO
+
+- Use a systemd service
+
+
+---
 This is a modification of https://github.com/ich777/docker-steamcmd-server/tree/vrising to run without docker
