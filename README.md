@@ -1,13 +1,11 @@
 # SteamCMD install of V Rising
 This will download and install SteamCMD. It will also install V Rising and run it.
 
-**Save Files:** The save files are located in: .../save-data/Saves
+**Save Files:** The save files are located in: `/serverdata/serverfiles/save-data/Saves`
 
-**Config Files:** The config files are located in: .../save-data/Settings
+**Config Files:** The config files are located in: `/serverdata/serverfiles/save-data/Settings`
 
 **ATTENTION:** First Startup can take very long since it downloads the gameserver files!
-
-
 
 ## Example Env params
 
