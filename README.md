@@ -31,9 +31,7 @@ Environment variables are in /opt/scripts/.env
 
 ## Setup
 
-**This is for Debian 11 only for now.**
-
-**It has only been tested on a Debian 11.3 install.**
+**Debian/Ubuntu supported**
 
 Run `scripts/setup.sh` to prepare the server.
 
