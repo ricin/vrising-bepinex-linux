@@ -106,14 +106,6 @@ if [ $? -ne 0 ];then
 	exit 1
 fi
 
-apt-get -y autoremove && \
-rm -rf /var/lib/apt/lists/*
-
-if [ $? -eq 1 ];then
-	echo "---  Package installation failed. Please correct errors and try again."
-	exit 1
-fi
-
 echo -e "\n\n\n"
 echo "---  Creating directories and setting permissions"
 mkdir -p ${DATA_DIR} && \
