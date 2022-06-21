@@ -1,5 +1,6 @@
-# SteamCMD install of V Rising
-This will download, install, and run SteamCMD, and V Rising Dedicated Server. 
+# V Rising Dedicated Server via SteamCMD
+This will download, install, and run V Rising Dedicated Server via SteamCMD.
+
 Optionally it will download the latest [BepInEx Pack for V Rising](https://v-rising.thunderstore.io/package/BepInEx/BepInExPack_V_Rising/), and enable it.
 
 **Save Files:** The save files are located in: `${SERVER_DIR}/save-data/Saves`
@@ -37,7 +38,7 @@ Run `scripts/setup.sh` to prepare the server.
 
 ## Running
 
-Run `/opt/scripts/start.sh` to start the server. It's recommended to run this within screen, or tmux.
+Run `/opt/scripts/start.sh` to start the server.
 
 A unique server name and password will be generated upon first run. 
 You can change them in `${SERVER_DIR}/save-data/Settings/ServerHostSettings.json`
